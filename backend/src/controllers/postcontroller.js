@@ -68,35 +68,38 @@ export const getPosts = async (req, res) => {
 // @route   POST /api/posts/:id/like
 // @access  Private
 export const likePost = async (req, res) => {
-    try {
-        const post = await Post.findById(req.params.id);
+  try {
+    const post = await Post.findById(req.params.id);
 
-        if (!post) {
-            return res.status(404).json({ message: 'Post not found' });
-        }
-
-        // Check if user has already liked this post
-        const alreadyLiked = post.likes.some(
-            (like) => like.userId.toString() === req.user._id.toString()
-        );
-
-        // If already liked, return without modification
-        if (alreadyLiked) {
-            return res.json(post.likes);
-        }
-
-        // Add new like with username (denormalized)
-        post.likes.push({
-            userId: req.user._id,
-            username: req.user.username
-        });
-
-        await post.save();
-        res.json(post.likes);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
     }
+
+    const userId = req.user._id.toString();
+
+    const likeIndex = post.likes.findIndex(
+      (like) => like.userId.toString() === userId
+    );
+
+    // 🔁 TOGGLE LOGIC
+    if (likeIndex !== -1) {
+      // User already liked → REMOVE like
+      post.likes.splice(likeIndex, 1);
+    } else {
+      // User has not liked → ADD like
+      post.likes.push({
+        userId: req.user._id,
+        username: req.user.username,
+      });
+    }
+
+    await post.save();
+    res.json(post.likes);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
+
 
 // @desc    Comment on a post
 // @route   POST /api/posts/:id/comment
