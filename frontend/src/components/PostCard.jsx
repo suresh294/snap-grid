@@ -24,21 +24,32 @@ const PostCard = ({ post, onPostUpdated }) => {
     const [likeLoading, setLikeLoading] = useState(false);
     const [showComments, setShowComments] = useState(false);
 
-    const isLiked = post.likes.some(like => like.userId === user._id);
+    const isLiked = post.likes.some(
+  like => like.userId?.toString() === user._id
+);
 
-    const handleLike = async () => {
-        if (likeLoading) return;
-        setLikeLoading(true);
-        try {
-            const { data } = await api.post(`/api/posts/${post._id}/like`);
-            // Update the post object with new likes array and notify parent
-            onPostUpdated({ ...post, likes: data });
-        } catch (error) {
-            console.error('Error liking post:', error);
-        } finally {
-            setLikeLoading(false);
-        }
-    };
+
+   const handleLike = async () => {
+  if (likeLoading) return;
+
+  try {
+    setLikeLoading(true);
+
+    const res = await api.post(`/api/posts/${post._id}/like`);
+
+    // 🔥 Update post in Feed state
+    onPostUpdated({
+      ...post,
+      likes: res.data,
+    });
+  } catch (err) {
+    console.error('Error liking post', err);
+  } finally {
+    setLikeLoading(false);
+  }
+};
+
+
 
     const handleCommentsUpdate = (updatedComments) => {
         onPostUpdated({ ...post, comments: updatedComments });
