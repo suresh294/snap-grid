@@ -1,4 +1,13 @@
 import Post from '../models/post.js';
+import fs from 'fs';
+import path from 'path';
+
+const uploadDir = path.join(process.cwd(), 'uploads');
+
+// Ensure uploads folder exists (PRODUCTION SAFE)
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 // @desc    Create a new post
 // @route   POST /api/posts
