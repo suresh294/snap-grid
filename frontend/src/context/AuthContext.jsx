@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const { data } = await api.post('/auth/login', { email, password });
+            const { data } = await api.post('/api/auth/login', { email, password });
             localStorage.setItem('token', data.token);
 
             // Store user info without token in localStorage for persistence
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (username, email, password) => {
         try {
-            const { data } = await api.post('/auth/signup', { username, email, password });
+            const { data } = await api.post('/api/auth/signup', { username, email, password });
             localStorage.setItem('token', data.token);
 
             const userData = {
