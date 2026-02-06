@@ -26,7 +26,7 @@ const CommentSection = ({ postId, comments, onCommentAdded, expanded, onClose })
 
         setLoading(true);
         try {
-            const { data } = await api.post(`/posts/${postId}/comment`, {
+            const { data } = await api.post(`/api/posts/${postId}/comment`, {
                 text: newComment
             });
             onCommentAdded(data); // data is the updated array of comments

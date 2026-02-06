@@ -30,7 +30,7 @@ const PostCard = ({ post, onPostUpdated }) => {
         if (likeLoading) return;
         setLikeLoading(true);
         try {
-            const { data } = await api.post(`/posts/${post._id}/like`);
+            const { data } = await api.post(`/api/posts/${post._id}/like`);
             // Update the post object with new likes array and notify parent
             onPostUpdated({ ...post, likes: data });
         } catch (error) {

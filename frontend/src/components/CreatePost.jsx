@@ -67,7 +67,7 @@ const CreatePost = ({ onPostCreated }) => {
                 formData.append('image', imageFile);
             }
 
-            const { data } = await api.post('/posts', formData);
+            const { data } = await api.post('/api/posts', formData);
 
             // Reset form
             setCaption('');
