@@ -4,7 +4,9 @@
 
 A full-stack social feed application built with React, Express, and MongoDB. It includes JWT authentication, post creation, image uploads, likes, comments, and a responsive interface.
 
-> **Demo status:** A public deployment URL has not been verified. The backend currently stores uploaded images on the server filesystem, so production deployment needs durable object storage and additional security hardening.
+**Live demo:** [SnapGrid](https://snap-grid-kappa.vercel.app)
+
+The backend currently stores uploaded images on the server filesystem, so production deployment needs durable object storage and additional security hardening.
 
 ## 🚀 Tech Stack
 
