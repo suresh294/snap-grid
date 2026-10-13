@@ -1,6 +1,10 @@
-# SnapGrid - Social Media Application
+# SnapGrid — Social Media Application
 
-A modern, full-stack social media application build with the MERN stack. This project demonstrates proficiency in building production-ready web applications with authentication, real-time updates, and file upload capabilities.
+[![CI](https://github.com/suresh294/snap-grid/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/suresh294/snap-grid/actions/workflows/ci.yml)
+
+A full-stack social feed application built with React, Express, and MongoDB. It includes JWT authentication, post creation, image uploads, likes, comments, and a responsive interface.
+
+> **Demo status:** A public deployment URL has not been verified. The backend currently stores uploaded images on the server filesystem, so production deployment needs durable object storage and additional security hardening.
 
 ## 🚀 Tech Stack
 
